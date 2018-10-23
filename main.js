@@ -26,9 +26,15 @@ var lobes_sea = [
 	    [[  100,   0], [ 140, -90], [ 180,   0]]
 	  ]
 	];
+
+var svg = d3.select("svg"),
+width = +svg.attr("width"),
+height = +svg.attr("height");
+
 var options = [
-	  {name: "Goode’s interrupted homolosine (Land)", projection: d3.geoInterruptedHomolosine().lobes(lobes_land)},
-	  {name: "Goode’s interrupted homolosine (Sea)", projection: d3.geoInterruptedHomolosine().lobes(lobes_sea)},
+	  {name: "Goode’s interrupted homolosine (Land: 2+3 lobes)", projection: d3.geoInterruptedHomolosine().lobes(lobes_land).scale(152.63)},
+	  {name: "Goode’s interrupted homolosine (Sea: 3 lobes)", projection: d3.geoInterruptedHomolosine().lobes(lobes_sea).scale(152.63)},
+	  {name: "Bogg’s interrupted eumorphic", projection: d3.geoInterruptedBoggs().lobes(lobes_land)},
 	  {name: "Aitoff", projection: d3.geoAitoff()},
 	  {name: "Albers", projection: d3.geoAlbers().scale(145).parallels([20, 50])},
 	  {name: "August", projection: d3.geoAugust().scale(60)},
@@ -55,7 +61,7 @@ var options = [
 	  {name: "Larrivée", projection: d3.geoLarrivee().scale(95)},
 	  {name: "Laskowski", projection: d3.geoLaskowski().scale(120)},
 	  {name: "Loximuthal", projection: d3.geoLoximuthal()},
-	  // {name: "Mercator", projection: d3.geoMercator().scale(490 / 2 / Math.PI)},
+	  {name: "Mercator", projection: d3.geoMercator().scale(490 / 2 / Math.PI)},
 	  {name: "Miller", projection: d3.geoMiller().scale(100)},
 	  {name: "McBryde–Thomas Flat-Polar Parabolic", projection: d3.geoMtFlatPolarParabolic()},
 	  {name: "McBryde–Thomas Flat-Polar Quartic", projection: d3.geoMtFlatPolarQuartic()},
@@ -84,17 +90,15 @@ menu.selectAll("option")
 .enter().append("option")
 .text(function(d) { return d.name; });
 
-svg = d3.select("svg"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
+
 
 	
 	var projection = d3.geoInterruptedHomolosine()
 	.lobes(lobes_land)
 	.rotate([0,0])
 	.scale(152.63)
-	.translate([width / 2, height / 2])
-	.precision(0.1);
+	//.translate([width / 2, height / 2])
+	//.precision(0.1);
     
 
     
@@ -156,9 +160,9 @@ function projectionTween(rotation,proje) {
 		  if (typeof(proje)=='undefined'){
 				var projection = options[menu.property('selectedIndex')].projection
 				.rotate(rotation)
-				.scale(152.63)
-				.translate([width / 2, height / 2])
-				.precision(0.1);
+				//.scale(152.63)
+				//.translate([width / 2, height / 2])
+				//.precision(0.1);
 				
 		  }else{
 //			  if(options[menu.property('selectedIndex')].name=='Goode’s interrupted homolosine (Sea)'){
@@ -168,9 +172,9 @@ function projectionTween(rotation,proje) {
 //			  }
 			var projection = proje
 			.rotate(rotation)
-			.scale(152.63)
-			.translate([width / 2, height / 2])
-			.precision(0.1);
+			//.scale(152.63)
+			//.translate([width / 2, height / 2])
+			//.precision(0.1);
 			  
 
 		  }
