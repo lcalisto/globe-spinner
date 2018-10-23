@@ -132,23 +132,86 @@ svg.append("path")
     .attr("class", "graticule")
     .attr("clip-path", "url(#clip)")
     .attr("d", path);
+//Load topojson data
+//d3.json("world-110m.json", function(error, world) {
+//  if (error) throw error;
+//
+//  svg.insert("path", ".graticule")
+//      .datum(topojson.feature(world, world.objects.land))
+//      .attr("class", "land")
+//      .attr("clip-path", "url(#clip)")
+//      .attr("d", path);
+//
+//  svg.insert("path", ".graticule")
+//      .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
+//      .attr("class", "boundary")
+//      .attr("clip-path", "url(#clip)")
+//      .attr("d", path);
+//});
 
-d3.json("world-110m.json", function(error, world) {
-  if (error) throw error;
+///////////////////Load geojson data/////////////////////////
+//Define color scale
+var color = d3.scaleLinear()
+  .domain([1, 20])
+  .clamp(true)
+  .range(['#fff', '#409A99']);
+//Get country name
+function nameFn(d){
+  return d && d.properties ? d.properties.Name : null;
+}
+//Get country name length
+function nameLength(d){
+  var n = nameFn(d);
+  return n ? n.length : 0;
+}
+//Get color
+function fillFn(d){
+  return color(nameLength(d));
+}
+/////////////////////////////////////////////////////////////////
+d3.json('world_mj.json', function(error, mapData) {
+	if (error) throw error;
+	var features = mapData.features;
 
-  svg.insert("path", ".graticule")
-      .datum(topojson.feature(world, world.objects.land))
-      .attr("class", "land")
-      .attr("clip-path", "url(#clip)")
-      .attr("d", path);
-
-  svg.insert("path", ".graticule")
-      .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
-      .attr("class", "boundary")
-      .attr("clip-path", "url(#clip)")
-      .attr("d", path);
+	features.forEach(f=>{
+	  svg.insert("path", ".graticule")
+		.datum(f)
+		.attr("class", "land")
+//		.style("fill",function() {
+//			return "hsl(" + Math.random() * 360 + ",70%,30%)";
+//	    })
+		.attr("clip-path", "url(#clip)")
+		.attr("d", path)
+		//.on('mouseover', function(a){console.log('mouseover: ',a)})
+        //.on('mouseout', function(a){console.log('mouseout: ',a)})
+        //.on('click', function(a){console.log('click: ',a)});
+  });
 });
-
+/////////////////// END geojson data/////////////////////////
+function randomColors(){
+	svg.selectAll("path")
+	.style("fill",function(f) {
+		if(f.type=='Feature'){
+			return "hsl(" + Math.random() * 360 + ",70%,30%)";
+		}
+	})
+}
+function randomGrey(){
+	svg.selectAll("path")
+	.style("fill",function(f) {
+		if(f.type=='Feature'){
+			return "hsl(" + Math.random() * 360 + " ,0%," + Math.round(Math.random() * 90) + "%)";
+		}
+	})
+}
+function fixedBlack(){
+	svg.selectAll("path")
+	.style("fill",function(f) {
+		if(f.type=='Feature'){
+			return "";
+		}
+	})
+}
 function update(rotation,proje) {
 	  svg.selectAll("path").interrupt().transition()
 	      .duration(1000).ease(d3.easeLinear)
@@ -189,4 +252,10 @@ function projectionTween(rotation,proje) {
 	    };
 	  };
 	}
+function downloadSvg(){
+	var config = {
+		    filename: 'mapExport',
+		  }
+	d3_save_svg.save(d3.select('svg').node(), config);
+};
 	

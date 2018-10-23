@@ -8,13 +8,23 @@
 	<script src="https://d3js.org/d3-array.v1.min.js"></script>
 	<script src="https://d3js.org/d3-geo.v1.min.js"></script>
 	<script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+	<script src="d3-save-svg.min.js"></script>
 </head>
 <body>
 	<center>
-		<span class="coordText">Projection: </span> <select
-			id="projection-menu"></select>
+		<p><span class="coordText">Projection: </span> <select id="projection-menu"></select>
+		</p>
+		<p>
+		<span class="coordText">Country colors: </span>
+		<button class="button" onclick="fixedBlack()">Original</button>
+		<button class="button" onclick="randomGrey()">New random grey</button>
+		<button class="button" onclick="randomColors()">New random colors</button>
+		</p>
+		<p>
+		<button class="button" onclick="downloadSvg()">Export map to SVG</button>
+		</p>
 	</center>
-	<svg width="960" height="484"></svg>
+	<svg width="960" height="484" id="mapSVG"></svg>
 	<script src="main.js"></script>
 
 	<div class="slidecontainer">
