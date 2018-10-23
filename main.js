@@ -253,9 +253,19 @@ function projectionTween(rotation,proje) {
 	  };
 	}
 function downloadSvg(){
-	var config = {
-		    filename: 'mapExport',
-		  }
-	d3_save_svg.save(d3.select('svg').node(), config);
+    var r = confirm("After export the map needs to reload to its original settings.");
+    if (r == true) {
+    	var config = {
+    		    filename: 'mapExport',
+    		  }
+    	d3_save_svg.save(d3.select('svg').node(), config);
+    	location.reload();
+    } else {
+
+    }
+
+    
+    
+
 };
 	
