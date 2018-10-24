@@ -6,5 +6,5 @@ You can access this page in [__https://gip-itc-universitytwente.github.io/globe-
 
 
 
-This work was based on some work of [__alexmacy__](https://gist.github.com/alexmacy) in  [__https://bl.ocks.org/alexmacy/6700d44240d2b6d3ec9767a5a5854e42__](https://bl.ocks.org/alexmacy/6700d44240d2b6d3ec9767a5a5854e42)
+This work was based on the work of [__alexmacy__](https://gist.github.com/alexmacy) in  [__https://bl.ocks.org/alexmacy/6700d44240d2b6d3ec9767a5a5854e42__](https://bl.ocks.org/alexmacy/6700d44240d2b6d3ec9767a5a5854e42)
 
