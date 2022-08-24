@@ -2,7 +2,7 @@
 
 A d3 globe map with diferent projections. The main goal of this is to show diferences between diferent projections and map techniques. 
 
-You can access this page in [__https://gip-itc-universitytwente.github.io/globe-spinner/__](https://gip-itc-universitytwente.github.io/globe-spinner/) 
+You can access this page in [__https://lcalisto.github.io/globe-spinner/__](https://lcalisto.github.io/globe-spinner/) 
 
 
 
